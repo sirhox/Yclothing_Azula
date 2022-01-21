@@ -1,2 +1,2 @@
 # Yclothing_Azula
-Proyecto vacio para el curso de ReactJs de Coderhouse
+Proyecto escalable de ecommerce para el curso de ReactJs de Coderhouse
