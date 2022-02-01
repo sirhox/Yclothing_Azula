@@ -2,6 +2,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 import NavBar from './components/NavBar'
 import ItemListContainer from './components/ItemListContainer';
+import ItemCount from './components/ItemCount';
 
 function App() {
   let items = {
@@ -16,6 +17,7 @@ function App() {
       brand="Yclothing"
     />
     <ItemListContainer items={items}/>
+    <ItemCount stock={5} initial={1}/>
     <div className="App">
       <label>Contenido</label>
     </div>
