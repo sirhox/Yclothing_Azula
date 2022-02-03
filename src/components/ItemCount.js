@@ -1,23 +1,27 @@
 import React, { useState } from 'react';
-import { Button } from "react-bootstrap"
+import {Box, TextField, IconButton} from '@mui/material';
+import AddSharpIcon from '@mui/icons-material/AddSharp';
+import RemoveSharpIcon from '@mui/icons-material/RemoveSharp';
 
 const ItemCount= ({stock, initial,onAdd}) =>{
     const [cantidad, setCant] = useState(initial);
 
-    const handlerButton = (numero) =>{
+    const handleButton = (numero) =>{
         setCant(numero+cantidad)
     }
     return(
     <>
-        <Button disabled={cantidad<1}  onClick={()=>handlerButton(-1)}>
-            -
-        </Button>
-        <label>{cantidad}</label>
-        <Button disabled={cantidad>=stock} onClick={()=>handlerButton(1)}>
-            +
-        </Button>
-
+         <Box sx={{ justifyContent: 'center', display: 'flex', alignItems:'center' }}>
+      <IconButton disabled={cantidad <= 0} onClick={() => {handleButton(-1)}}>
+        <RemoveSharpIcon/>
+      </IconButton>
+      {cantidad}
+      <IconButton disabled={cantidad >= stock} onClick={() => {handleButton(1)}}>
+        <AddSharpIcon/>
+      </IconButton>
+    </Box>
     </>
-    );
+    )
 }
+
 export default ItemCount

@@ -1,19 +1,33 @@
-import { Card } from "react-bootstrap"
 
-const ItemListContainer = ({items}) =>{
-  debugger
+import { useEffect, useState } from "react";
+import ItemList from './ItemList'
+
+const ItemListContainer = () =>{
+  
+  const [items, setItems] = useState([]);
+
+  useEffect(() =>{
+    getData().then(res => {
+      setItems(res)
+    })
+  }, [])
+
+  let getData = () => new Promise((resolve, reject) => {
+    setTimeout(function(){
+
+      let items = [{
+        id:1,
+        title:"Remera negra", 
+        price:1600,
+        description:"Una remera negra perfecta para usar", 
+        pictureUrl :'https://www.remerasya.com/pub/media/catalog/product/cache/e4d64343b1bc593f1c5348fe05efa4a6/r/e/remera_negra_lisa_1.jpg'
+      }]
+      resolve(items)
+    }, 2000);
+  });
+
   return (
-    <Card style={{width: '10rem'}}>
-      <Card.Img variant="top" src={items.src}/>
-      <Card.Body>
-        <Card.Title>
-          {items.title}
-        </Card.Title>
-        <Card.Text>
-          {items.text}
-        </Card.Text>
-      </Card.Body>
-    </Card>
+    <ItemList items={items}/>
   )
 }
 
