@@ -12,7 +12,7 @@ const ItemCount= ({stock, initial,onAdd}) =>{
     return(
     <>
          <Box sx={{ justifyContent: 'center', display: 'flex', alignItems:'center' }}>
-      <IconButton disabled={cantidad <= 0} onClick={() => {handleButton(-1)}}>
+      <IconButton disabled={cantidad <= 1} onClick={() => {handleButton(-1)}}>
         <RemoveSharpIcon/>
       </IconButton>
       {cantidad}
