@@ -2,8 +2,10 @@ import * as React from 'react';
 import { Box, AppBar, Toolbar, Typography, Menu, MenuItem, Container, IconButton, Button,ThemeProvider,createTheme} from "@mui/material"
 import MenuIcon from '@mui/icons-material/Menu';
 import CartWidget from './CartWidget'
+import { useNavigate } from "react-router-dom";
 
 const NavBar = ({brand, list = []}) => {
+  let navigate = useNavigate()
 
   const [anchorElNav, setAnchorElNav] = React.useState(null);
 
@@ -13,6 +15,11 @@ const NavBar = ({brand, list = []}) => {
 
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
+  };
+
+  const handleClickCategory = (title) => {
+    handleCloseNavMenu();
+    navigate(`/category/${title.toLowerCase()}`);
   };
 
   const darkTheme = createTheme({
@@ -33,7 +40,8 @@ const NavBar = ({brand, list = []}) => {
         variant="h6"
         noWrap
         component="div"
-        sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
+        sx={{ cursor: 'pointer',mr: 2, display: { xs: 'none', md: 'flex' } }}
+        onClick={() => navigate('/')}
       >
         {brand}
       </Typography>
@@ -67,7 +75,7 @@ const NavBar = ({brand, list = []}) => {
           }}
         >
           {list.map((menu) => (
-            <MenuItem key={menu.title} onClick={handleCloseNavMenu}>
+            <MenuItem key={menu.title} onClick={()=>handleClickCategory(menu.title)}>
               <Typography textAlign="center">{menu.title}</Typography>
             </MenuItem>
           ))}
@@ -85,7 +93,7 @@ const NavBar = ({brand, list = []}) => {
         {list.map((el) => (
           <Button
             key={el.title}
-            onClick={handleCloseNavMenu}
+            onClick={()=>handleClickCategory(el.title)}
             sx={{ my: 2, color: 'white', display: 'block' }}
           >
             {el.title}

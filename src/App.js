@@ -1,19 +1,27 @@
 import './App.css';
 import NavBar from './components/NavBar'
-import ItemListContainer from './components/ItemListContainer';
 import ItemCount from './components/ItemCount';
-import ItemDetailConatiner from './components/ItemDetailContainer';
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+
+
+import ItemListContainer from '../src/views/ItemListContainer';
+import ItemDetailConatiner from '../src/views/ItemDetailContainer';
 
 function App() {
  
   return (
     <>
-    <NavBar 
-      list={[{title: 'Inicio'}, {title: 'Categorias'}, {title: 'Ofertas'}]}
+    <Router>
+      <NavBar 
+      list={[{title: 'Invierno'}, {title: 'Verano'}, {title: 'Primavera'}, {title: 'Otoño'},]}
       brand="Yclothing"
-    />
-    <ItemListContainer/>
-    <ItemDetailConatiner/>
+     />
+        <Routes>
+          <Route path="/" element={<ItemListContainer />} />
+          <Route path="/item/:id" element={<ItemDetailConatiner />} />
+          <Route path="/category/:title" element={<ItemListContainer />} />
+        </Routes>
+    </Router>
     </>
   );
 }
