@@ -1,6 +1,5 @@
 import { Card, CardActionArea, CardMedia, CardContent, Typography,Button,Box} from "@mui/material"
 import { useNavigate } from "react-router-dom";
-import ItemCount from './ItemCount'
 
 
 const ItemListContainer = ({item}) =>{
@@ -30,9 +29,9 @@ const ItemListContainer = ({item}) =>{
     
       </CardActionArea>
       <Box sx={{display:'flex',justifyContent:'center'}}>
-      <Button variant="outlined" >Ver detalle</Button>
+      <Button variant="outlined" onClick={() => navigate(`/item/${item.id}`)} >Ver detalle</Button>
       </Box>
-      <ItemCount initial={1} stock={5}/>
+
     </Card>
   )
 }
