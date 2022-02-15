@@ -7,14 +7,13 @@ import { useCart } from "../contexts/CartContext";
 
 
 const ItemDetail = ({item}) => {
-  const [cantidad, setCant] = useState(0)
-
   const cart = useCart();
-
+  //cart.addedItems.length //usar esto de alguna forma, rompe todo
   const onAdd = (quantityToAdd) =>{
     //setCant(quantityToAdd)
     cart.addItem({...item, quantityToAdd:quantityToAdd})
   }
+  const CantidadItemsEnCarrito = cart.cart.addedItems.length
   
   let navigate = useNavigate()
   return(
@@ -44,7 +43,7 @@ const ItemDetail = ({item}) => {
       </Grid>
     </Box>
     <Box sx={{ m: 5,display: 'flex', justifyContent: 'flex-end'}}>
-    <Button variant="outlined" onClick={() => navigate(`/cart`)} disabled={cantidad===0} sx={{m:0.5}}>Terminar Compra</Button>
+    <Button variant="outlined" onClick={() => navigate(`/cart`)} disabled={CantidadItemsEnCarrito===0} sx={{m:0.5}}>Terminar Compra</Button>
     </Box>
     </>
   )
