@@ -3,14 +3,19 @@ import Description from "@mui/icons-material/Description"
 import ItemCount from './ItemCount'
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
+import { useCart } from "../contexts/CartContext";
 
 
 const ItemDetail = ({item}) => {
   const [cantidad, setCant] = useState(0)
 
+  const [cart,setCart] = useCart();
+
   const onAdd = (quantityToAdd) =>{
-    setCant(quantityToAdd)
+    //setCant(quantityToAdd)
+    cart.addItem({...item, quantityToAdd:quantityToAdd})
   }
+  
   let navigate = useNavigate()
   return(
     <>
