@@ -41,9 +41,9 @@ const ItemDetail = ({item}) => {
           </Grid>
         </Grid>
       </Grid>
-    </Box>
-    <Box sx={{ m: 5,display: 'flex', justifyContent: 'flex-end'}}>
+    <Box sx={{ m: 1,display: 'flex', justifyContent: 'flex-end'}}>
     <Button variant="outlined" onClick={() => navigate(`/cart`)} disabled={CantidadItemsEnCarrito===0} sx={{m:0.5}}>Terminar Compra</Button>
+    </Box>
     </Box>
     </>
   )

@@ -23,12 +23,14 @@ export const CartProvider = ({ children }) => {
   };
 
 const isInCart = (idItem)=>{
-  return cart.addedItems.some((addedItem) => addedItem.idItem === idItem)
+  return cart.addedItems.some((addedItem) => addedItem.id === idItem)
 }
 
 const removeItem= (itemId)=>{
-  setCart(cart.addedItems.filter(item=>item.id !== itemId))
+  const removedItemList = cart.addedItems.filter(item => item.id !== itemId)
+  setCart({...cart, addedItems: removedItemList})
 }
+
   
   const clear = () => {
     setCart(INITIAL_STATE);
