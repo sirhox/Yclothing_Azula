@@ -8,9 +8,9 @@ import ItemListContainer from '../src/views/ItemListContainer';
 import ItemDetailConatiner from '../src/views/ItemDetailContainer';
 import CartContainer from '../src/views/CartContainer';
 import { CartProvider } from "./contexts/CartContext";
+import React from 'react';
 
 function App() {
- 
   return (
     <>
     <CartProvider>
