@@ -18,8 +18,8 @@ export const CartProvider = ({ children }) => {
       return;
     }
     const newAddedItems=[...cart.addedItems,item];
-
-    setCart({ ...cart, addedItems: newAddedItems });
+    const newTotalPrice = cart.totalPrice + item.price * item.quantityToAdd
+    setCart({ ...cart, addedItems: newAddedItems, totalPrice: newTotalPrice} );
   };
 
 const isInCart = (idItem)=>{
@@ -28,7 +28,9 @@ const isInCart = (idItem)=>{
 
 const removeItem= (itemId)=>{
   const removedItemList = cart.addedItems.filter(item => item.id !== itemId)
-  setCart({...cart, addedItems: removedItemList})
+  const removedItem = cart.addedItems.find(item => item.id === itemId)
+  const newTotalPrice = cart.totalPrice - removedItem.price * removedItem.quantityToAddity
+  setCart({...cart, addedItems: removedItemList, totalPrice: newTotalPrice})
 }
 
   

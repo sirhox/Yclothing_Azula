@@ -14,7 +14,6 @@ const ItemListContainer = () =>{
   useEffect(() => {
 		const getRopa = async () => {
       let q = null
-      console.log(title)
       if(title){
         q= query(collection(db, 'ropa'),where('cateogry','==',title));
       }else{

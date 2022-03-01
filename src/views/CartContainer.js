@@ -1,6 +1,6 @@
 import { Box, Grid, Typography, Button } from "@mui/material"
-import Description from "@mui/icons-material/Description"
-import { useState } from "react"
+//import Description from "@mui/icons-material/Description"
+//import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { useCart } from "../contexts/CartContext";
 
@@ -13,7 +13,7 @@ const CartContainer = () => {
     cart.removeItem(id)
   }
   const cart=useCart();
-  const ItemsAgregados = cart.cart.addedItems
+  //const ItemsAgregados = cart.cart.addedItems
   let navigate = useNavigate()
     return (
       <>
@@ -24,7 +24,7 @@ const CartContainer = () => {
          {cart.cart.addedItems.length >0 ? cart.cart.addedItems.map(item=>
       <Grid container spacing={1} key={item.id}>
         <Grid item xs={4}>
-          <img src={item.pictureUrl} width={150}/> 
+          <img alt={'no hay imagen'} src={item.pictureUrl} width={150}/> 
         </Grid>
         <Grid container item xs={7}>
           <Grid item xs={12}>
@@ -33,7 +33,7 @@ const CartContainer = () => {
             </Typography>
           </Grid>
           <Grid item xs={12} sx={{display: 'flex', gap: 1,justifyContent:'space-between'}}>
-            {item.quantityToAdd}  
+            {"X "+item.quantityToAdd}  
             <Button variant="outlined"  onClick={() => remover(item.id)} sx={{m:0.5}}>Quitar</Button>
           </Grid>
           <Grid item xs={12} sx={{display: 'flex', alignItems: 'left'}} >
@@ -52,8 +52,16 @@ const CartContainer = () => {
       </Box>
       
       }
-    </Box>
-    <Box sx={{ m: 5,display: 'flex', justifyContent: 'flex-end'}}>
+      <Box>
+      </Box>
+
+      {cart.cart.addedItems.length >0 ?
+    <Typography variant="h3" sx={{p:3,display: 'flex',  justifyContent:'center'}} >
+      <Button variant="outlined" onClick={() => navigate(`/`)} sx={{m:0.5}}>Seguir comprando</Button>
+      <Button variant="outlined" onClick={() => navigate(`/checkout`)} sx={{m:0.5}}>Continuar...</Button>
+      
+    </Typography>
+    : null}
     </Box>
     
       </>

@@ -31,7 +31,7 @@ const ItemDetailConatiner = () => {
     return (
 
       item.map((data) => {
-      return <ItemDetail item={data}/>
+      return <ItemDetail key={id} item={data}/>
     })
     )
 
