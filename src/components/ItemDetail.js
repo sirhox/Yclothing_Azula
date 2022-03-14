@@ -8,10 +8,12 @@ import { useCart } from "../contexts/CartContext";
 
 const ItemDetail = ({item}) => {
   const cart = useCart();
+  const [stock, setStock] = useState(5)
   //cart.addedItems.length //usar esto de alguna forma, rompe todo
   const onAdd = (quantityToAdd) =>{
     //setCant(quantityToAdd)
     cart.addItem({...item, quantityToAdd:quantityToAdd})
+    setStock(stock - quantityToAdd)
   }
   const CantidadItemsEnCarrito = cart.cart.addedItems.length
   
@@ -21,7 +23,7 @@ const ItemDetail = ({item}) => {
     <Box sx={{width: '50%', boxShadow: 5, m: 5}}>
       <Grid container spacing={1}>
         <Grid item xs={4}>
-          <img src={item.pictureUrl} width={150}/> 
+          <img alt="No hay imagen" src={item.pictureUrl} width={150}/> 
         </Grid>
         <Grid container item xs={7}>
           <Grid item xs={12}>
@@ -37,7 +39,7 @@ const ItemDetail = ({item}) => {
             <Typography variant="h4" sx={{flexGrow: 1}}>
             ${item.price}
             </Typography>
-            <ItemCount onAdd={onAdd} initial={1} stock={5}/>
+            <ItemCount onAdd={onAdd} initial={1} stock={stock}/>
           </Grid>
         </Grid>
       </Grid>

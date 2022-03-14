@@ -15,7 +15,7 @@ const ItemListContainer = () =>{
 		const getRopa = async () => {
       let q = null
       if(title){
-        q= query(collection(db, 'ropa'),where('cateogry','==',title));
+        q= query(collection(db, 'ropa'),where('category','==',title));
       }else{
         q= query(collection(db, 'ropa'));
       }

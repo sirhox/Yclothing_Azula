@@ -1,11 +1,13 @@
-import { Box } from '@mui/material'
+import { Grid } from '@mui/material'
 import Item from './Item'
 
 const ItemList = ({items}) =>{
   return (
-    <Box display="flex">
-      {items.map(it => <Item key={it.title} item={it}/>)}
-    </Box>
+      <Grid sx={{}} container> 
+
+     {items.map(it =>  (<Grid xs={2} item key={it.id}> <Item key={it.title} item={it}/> </Grid>))}
+
+    </Grid>
   )
 }
 

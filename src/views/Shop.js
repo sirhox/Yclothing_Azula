@@ -21,6 +21,18 @@ const Shop = () => {
 	// Este estado está destinado a guardar el id de la compra
 	const [purchaseID, setPurchaseID] = useState('');
 
+	const [emailConfirmado, setEmailConfirmado] = useState('')
+
+	const formularioCompleto = () =>{
+	  return (
+		buyer.name !== '' &&
+		buyer.phone !== '' &&
+		buyer.email !== '' &&
+		emailConfirmado !== '' && 
+		emailConfirmado === buyer.email
+	  )
+	}
+
     const handleOnChange = (e) => {
 		const { value, name } = e.target;
 		setBuyer({ ...buyer, [name]: value });
@@ -28,16 +40,15 @@ const Shop = () => {
     
     const onSubmit = async (e) => {
 		e.preventDefault();
-		console.log(buyer);
 		const docRef = await addDoc(collection(db, 'orden'), {
 			buyer,
             ItemsAgregados,
             date: new Date(),
             total:cart.cart.totalPrice,
 		});
-		console.log('Document written with ID: ', docRef.id);
 		setPurchaseID(docRef.id);
 		setBuyer(initialState);
+		setEmailConfirmado('')
         cart.clear() //limpio el carrito
 	};
   const cart=useCart();
@@ -77,8 +88,19 @@ const Shop = () => {
 					onChange={handleOnChange}
                     label='Email'
 				/>
+				<TextField 
+				placeholder="Confirmar Email"
+				style={{ margin: 10, width: 400 }}
+				value={emailConfirmado} 
+				name='confirm-email'
+				onChange={(e) => setEmailConfirmado(e.target.value)} 
+				label="Confirmar email" 	
+				type="email"/>
+
+        			{emailConfirmado !== '' && emailConfirmado !== buyer.email ? (<Typography sx={{display:'flex',justifyContent:'center'}}variant="h6" color={'red'}>No coinciden los email</Typography>) : null}
+
                 <Typography variant="h3" sx={{p:3,display: 'flex',  justifyContent:'center'}} >
-				<Button variant="outlined" disabled={ItemsAgregados<1} onClick={onSubmit} sx={{m:0.5}}>Enviar</Button>
+				<Button variant="outlined"disabled={!formularioCompleto()||ItemsAgregados<1} onClick={onSubmit} sx={{m:0.5}}>Enviar</Button>
                 </Typography>
 			</form>
 			{purchaseID && <MessageSuccess purchaseID={purchaseID} />}

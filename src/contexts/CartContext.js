@@ -12,9 +12,15 @@ const INITIAL_STATE = {
 export const CartProvider = ({ children }) => {
   const [cart, setCart] = useState(INITIAL_STATE);
 
-  const addItem = (item) => {
+  const addItem = (item,quantityToAdd) => {
     if (isInCart(item.id)) {
-      // ya existe el item no hago nada
+
+      const itemActual = cart.addedItems.find(itemActual => itemActual.id === item.id)
+      let newItems =cart.addedItems.filter(itemActual => itemActual.id !== item.id)
+      newItems.push({...item, quantityToAdd: item.quantityToAdd + itemActual.quantityToAdd})
+      const newTotalPrice = cart.totalPrice + item.price * item.quantityToAdd
+      setCart({ ...cart, addedItems: newItems, totalPrice: newTotalPrice} );
+
       return;
     }
     const newAddedItems=[...cart.addedItems,item];
@@ -29,7 +35,7 @@ const isInCart = (idItem)=>{
 const removeItem= (itemId)=>{
   const removedItemList = cart.addedItems.filter(item => item.id !== itemId)
   const removedItem = cart.addedItems.find(item => item.id === itemId)
-  const newTotalPrice = cart.totalPrice - removedItem.price * removedItem.quantityToAddity
+  const newTotalPrice = cart.totalPrice - removedItem.price * removedItem.quantityToAdd
   setCart({...cart, addedItems: removedItemList, totalPrice: newTotalPrice})
 }
 
